@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/Service/homePage.dart';
-import 'package:testlogin/Service/logoutService.dart';
-import 'package:testlogin/Service/loginVerification.dart';
+import 'package:testlogin/Service/logoutService.dart' as lgOut;
+import 'package:testlogin/Service/loginVerification.dart' as lgIn;
+
+import 'Service/logoutService.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -75,7 +77,11 @@ class _HomePageState extends State<HomePage> {
             Align(
             alignment: Alignment.center,
             child: FlatButton(
-              onPressed: makeLogoutRequest(token),
+              onPressed: (){
+                makeLogoutRequest(lgIn.token);
+                Navigator.of(context).pushNamed('/second');
+                print(lgIn.token);
+              },
               padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Text(
                 'Logout',

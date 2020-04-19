@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 10),
                   TextField(
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       hintStyle: TextStyle(color: Colors.black),
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 10),
                   TextField(
                     obscureText: true,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       hintStyle: TextStyle(color: Colors.red),
                       filled: true,
@@ -178,9 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                   ), 
                   borderRadius: BorderRadius.circular(50)),
                   onPressed: (){
-                    Ts.makeLoginRequest(admnController.text, pswdController.text);
-                    print(Ts.token);
-                    if(Ts.token != null){
+                    int sc = Ts.makeLoginRequest(admnController.text, pswdController.text); 
+                    print("sc = $sc");
+                    if(sc == 200){
                       Navigator.of(context).pushNamed('/home');
                     } else{
                       showDialog(
