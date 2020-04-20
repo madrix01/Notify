@@ -177,8 +177,8 @@ class _LoginPageState extends State<LoginPage> {
                       style: BorderStyle.solid
                   ), 
                   borderRadius: BorderRadius.circular(50)),
-                  onPressed: (){
-                    int sc = Ts.makeLoginRequest(admnController.text, pswdController.text); 
+                  onPressed: () async{
+                    int sc = await Ts.makeLoginRequest(admnController.text, pswdController.text); 
                     print("sc = $sc");
                     if(sc == 200){
                       Navigator.of(context).pushNamed('/home');
