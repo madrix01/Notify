@@ -4,6 +4,8 @@ import 'package:testlogin/Service/loginVerification.dart' as TokenService;
 import 'package:http/http.dart' as http ; 
 import 'dart:convert';
 
+String _usrId;
+String get usrId => _usrId;
 
 Future<List<TestApi>> fetchTestApi() async {
   final String url = 'http://192.168.1.109:8000/auth/home/';
@@ -19,6 +21,8 @@ Future<List<TestApi>> fetchTestApi() async {
     print('Success');
     print(response.body);
     List<TestApi> apis = body.map((dynamic item) => TestApi.fromJson(item)).toList();
+    print(apis[0].userId);
+    _usrId = apis[0].userId;
     return apis;
   } else{
     print('NO return');
@@ -26,18 +30,18 @@ Future<List<TestApi>> fetchTestApi() async {
 }
 
 class TestApi{
-  final String message;
   final String username;
+  final String userId;
 
   TestApi({
-    @required this.message, 
-    @required this.username
+    @required this.username, 
+    @required this.userId,
     });
 
   factory TestApi.fromJson(Map<String, dynamic> json){
     return TestApi(
-      message: json["message"],
       username: json["username"],
+      userId: json["userId"],
     );
   }
 }

@@ -8,6 +8,8 @@ import 'package:testlogin/Service/loginVerification.dart' as lgIn;
 import 'package:testlogin/Model/postModel.dart';
 import 'Service/logoutService.dart';
 
+int _usr;
+int get usr => _usr; 
 
 class HomePage extends StatefulWidget {
   @override
@@ -160,6 +162,9 @@ class _HomePageState extends State<HomePage> {
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.create),
             backgroundColor: Color(0xFFBC7EFF),
+            onPressed: (){
+              Navigator.of(context).pushNamed('/addPost');
+            },
           ),
         ),
       ),

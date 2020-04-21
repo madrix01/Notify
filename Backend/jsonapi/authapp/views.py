@@ -10,9 +10,11 @@ from rest_framework.response import Response
 def home(request):
 	username = request.user
 	username = str(username)
+	userId  = request.user.id
+	userId = str(userId)
 	print(username)
 	content = {
-		'message' : f'Welcome {username}',
-		'username' : username
+		'username' : username,
+		'userId' : userId,
 		},
 	return Response(data=content, status=status.HTTP_200_OK)
