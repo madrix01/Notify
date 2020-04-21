@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #apps 
     'main',
     'authapp',
+    'posts',
 
     #third party
     'rest_framework',
