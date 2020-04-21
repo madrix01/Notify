@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:testlogin/Service/homePage.dart';
 import 'package:testlogin/Service/logoutService.dart' as lgOut;
 import 'package:testlogin/Service/loginVerification.dart' as lgIn;
-
+import 'package:testlogin/Model/postModel.dart';
 import 'Service/logoutService.dart';
 
 
@@ -11,6 +14,10 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
+  Future<Void> refreshlist() async {
+    await Future.delayed(Duration(seconds: 2));
+    fetchPostApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +93,43 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Container(
-                color:Colors.red,
-                height: 200,
+                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                color:Colors.grey[900],
+                height: 500,
+                child: RefreshIndicator(
+                  onRefresh: refreshlist,
+                  child: FutureBuilder(
+                    future: fetchPostApi(),
+                    builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot){
+                      if(snapshot.hasData){
+                        List<Post> posts = snapshot.data;
+                        return ListView(
+                          children: posts.map((Post post) => ListTile(
+                            title: Text(
+                              post.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30
+                                ),
+                              ),
+                            subtitle: Text(
+                              post.description,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 20
+                                )
+                              ),
+                            ),
+                        ).toList(),
+                        );
+                      }else {
+                        Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+                ),
               ),
+              SizedBox(height: 10,),
               Align(
               alignment: Alignment.center,
               child: FlatButton(
@@ -115,7 +156,11 @@ class _HomePageState extends State<HomePage> {
               )
               ),
             ],
-          )
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.create),
+            backgroundColor: Color(0xFFBC7EFF),
+          ),
         ),
       ),
     );

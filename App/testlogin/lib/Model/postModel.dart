@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<List<Post>> fetchPostApi() async{
-  final String url = 'http://192.168.1.109:8000/post/api';
+  final String url = 'http://192.168.1.109:8000/post/allpost/api/';
   final String tkn = TokenService.token;
+  print(tkn);
   final response = 
     await http.get(
       url,
