@@ -25,7 +25,9 @@ makeNewRequest(String title, String description, String tkn) async{
     encoding: encoding,
   );
   print(response.body);
+  print("[Add Post Status code $_postStatCode]");
   int stat = response.statusCode; 
   print("Post Status $stat");
   _postStatCode = response.statusCode;
+  return response.statusCode;
 }

@@ -13,3 +13,12 @@ from django.http import JsonResponse
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializers
+
+
+@permission_classes([IsAuthenticated])
+class MyPost(generics.ListCreateAPIView):
+    serializer_class = PostSerializers
+    def get_queryset(self):
+        user = self.request.user
+        print(user)
+        return Post.objects.filter(user_id = user)

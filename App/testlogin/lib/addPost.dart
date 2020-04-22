@@ -15,13 +15,14 @@ class _CreatePostState extends State<CreatePost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Color(0xFF1c1c1c),
       body: SafeArea(
         child: Column(
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                borderRadius: new BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20),
                 color: Colors.redAccent,
                 boxShadow: [
                   BoxShadow(

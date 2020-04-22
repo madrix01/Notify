@@ -28,39 +28,36 @@ class _HomePageState extends State<HomePage> {
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
-          backgroundColor: Color(0xFF3c3c3c),
+          backgroundColor: Color(0xFF1c1c1c),
           body: Column(
             children: <Widget>[
               Container(
-              decoration: BoxDecoration(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.redAccent,
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0.0, 1.0), //(x,y)
                     blurRadius: 6.0,
                   ),
-                ],
-                color: Color(0xFFBC7EFF),
-                borderRadius: new BorderRadius.only(bottomLeft: Radius.circular(80)),
-                border:Border.all(
-                  color: Color(0xFF000000), 
-                  width: 5,
-                )),
-              height: 160,
+                ]
+              ),
               width: double.maxFinite,
-              padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
-              child: Center(
+              height: 100,
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Align(
+                alignment: Alignment.center,
                 child: Text(
                   "Notify",
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Ubuntu"
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
-                ),
+                  ),
               ),
             ),
-              SizedBox(height: 20,),
+              SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -95,9 +92,14 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                color:Colors.grey[900],
-                height: 500,
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color:Colors.grey[850],
+                ),
+                
+                height: 550,
                 child: RefreshIndicator(
                   onRefresh: refreshlist,
                   child: FutureBuilder(
@@ -131,37 +133,53 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
-              Align(
-              alignment: Alignment.center,
-              child: FlatButton(
-                onPressed: (){
-                  makeLogoutRequest(lgIn.token);
-                  Navigator.of(context).pushNamed('/second');
-                  print(lgIn.token);
-                },
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 30
-                  ),
-                  ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Colors.red,
-                    width: 1,
-                    style: BorderStyle.solid
-                    ), 
-                  borderRadius: BorderRadius.circular(50)),
-              )
-              ),
+              // Align(
+              // alignment: Alignment.center,
+              // child: FlatButton(
+                 
+              //   padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+              //   child: Text(
+              //     'Logout',
+              //     style: TextStyle(
+              //       color: Colors.red,
+              //       fontSize: 30
+              //     ),
+              //     ),
+              //   shape: RoundedRectangleBorder(
+              //     side: BorderSide(
+              //       color: Colors.red,
+              //       width: 1,
+              //       style: BorderStyle.solid
+              //       ), 
+              //     borderRadius: BorderRadius.circular(50)),
+              // )
+              // ),
             ],
           ),
+          bottomNavigationBar: BottomAppBar(
+            notchMargin: 5,
+            shape: CircularNotchedRectangle(),
+            child: new Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.lock_outline, color: Colors.white,),
+                onPressed: (){
+                   makeLogoutRequest(lgIn.token);
+                   Navigator.of(context).pushNamed('/second');
+                   print(lgIn.token);
+                 },
+                ),
+                IconButton(icon: Icon(Icons.search, color: Colors.white,), onPressed: () {},),
+              ],
+            ),
+            color: Colors.grey[850],
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.create),
-            backgroundColor: Color(0xFFBC7EFF),
+            elevation: 4.0,
+            backgroundColor: Colors.redAccent,
             onPressed: (){
               Navigator.of(context).pushNamed('/addPost');
             },
