@@ -21,5 +21,5 @@ makePostRequest(String admn_no, String email, String password,) async {
     body: jsonBody,
     encoding: encoding,
   );
-  _statusCode = response.statusCode;
+  return response.statusCode;
 }

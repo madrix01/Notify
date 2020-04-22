@@ -25,48 +25,43 @@ class _LoginPageState extends State<LoginPage> {
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
-          backgroundColor: Color(0xFF3c3c3c),
+          backgroundColor: Color(0xFF1c1c1c),
           body:
           Column(
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
-                    ),
-                  ],
-                  color: Color(0xFFBC7EFF),
-                  borderRadius: new BorderRadius.only(bottomLeft: Radius.circular(80)),
-                  border:Border.all(
-                    color: Color(0xFF000000), 
-                    width: 5,
-                  )),
-                height: 160,
-                width: double.maxFinite,
-                padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
-                child: Center(
-                  child: Text(
-                    "Notify",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Ubuntu"
-                    ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.redAccent,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
-                ),
+                ]
               ),
+              width: double.maxFinite,
+              height: 100,
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Notify",
+                  style: TextStyle(
+                    fontSize: 50,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
+                  ),
+                  ),
+              ),
+            ),
               SizedBox(height: 10),
               //Heading
               Align(
                 alignment: Alignment.centerLeft,
                   child: Container(
                     margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
+                    child: Text(
                       'Login',
                       style: TextStyle(
                         color: Colors.white,
@@ -75,83 +70,50 @@ class _LoginPageState extends State<LoginPage> {
                         fontFamily: 'Ubuntu',
                       ),
                   ),
-                    ),
                 ),
               ),
               SizedBox(height:30),
               //Admission no.
               Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
-                    ),
-                  ],
-                  color: Color(0xFFBC7EFF),
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  border:Border.all(
-                    color: Color(0xFF000000), 
-                    width: 5,
-                  )),
                 padding: EdgeInsets.all(10),
-                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                borderRadius: new BorderRadius.circular(20),
+                color: Colors.grey[850],
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ]
+              ),
                 child: Column(
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: BorderedText(
-                        strokeColor: Colors.black,
-                        child: Text(
-                          "Admission No.",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                          ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
                     TextField(
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        hintStyle: TextStyle(color: Colors.black),
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      ),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        border: OutlineInputBorder(),
+                        labelText: 'Admission No.',
+                       ),
+                      autofocus: false,
                       controller: admnController,
                     ),
-                     SizedBox(height: 20,),
               //Password field
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: BorderedText(
-                        strokeColor: Colors.black,
-                        child: Text(
-                          "Password",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                          ),
-                      ),
-                    ),
                     SizedBox(height: 10),
                     TextField(
                       obscureText: true,
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintStyle: TextStyle(color: Colors.red),
-                        filled: true,
-                        fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      ),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                       ),
+                      autofocus: false,
                       controller: pswdController,
-                    ),
-                    SizedBox(height:30),
+                  ),
                     
                   ],
                 ),
@@ -160,24 +122,17 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                   alignment: Alignment.center,
                   child: FlatButton(
-                    color: Color(0xFFBC7EFF),
+                    color: Colors.redAccent,
                     padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
+                    child: Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 30
                         ),
                       ),
-                    ),
+
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.black,
-                        width: 5,
-                        style: BorderStyle.solid
-                    ), 
                     borderRadius: BorderRadius.circular(50)),
                     onPressed: () async{
                       int sc = await Ts.makeLoginRequest(admnController.text, pswdController.text); 
@@ -212,16 +167,13 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: (){
                       Navigator.of(context).pushNamed('/');
                     },
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
+                    child: Text(
                       "Register Instead",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
                       ),
                       ),
-                    ),
                   ),
               ),
             ],
