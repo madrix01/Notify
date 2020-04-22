@@ -20,209 +20,164 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return 
-    SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF3c3c3c),
-        body:
-        Column(
-          children: <Widget>[
-            Container(
+    WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomPadding: false,
+          backgroundColor: Color(0xFF1c1c1c),
+          body:
+          Column(
+            children: <Widget>[
+              Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.redAccent,
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0.0, 1.0), //(x,y)
                     blurRadius: 6.0,
                   ),
-                ],
-                color: Color(0xFFBC7EFF),
-                borderRadius: new BorderRadius.only(bottomLeft: Radius.circular(80)),
-                border:Border.all(
-                  color: Color(0xFF000000), 
-                  width: 5,
-                )),
-              height: 160,
+                ]
+              ),
               width: double.maxFinite,
-              padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
-              child: Center(
+              height: 100,
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Align(
+                alignment: Alignment.center,
                 child: Text(
                   "Notify",
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Ubuntu"
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            //Heading
-            Align(
-              alignment: Alignment.centerLeft,
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: BorderedText(
-                    strokeColor: Colors.black,
-                    child: Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Ubuntu',
-                    ),
-                ),
                   ),
               ),
             ),
-            SizedBox(height:30),
-            //Admission no.
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
-                color: Color(0xFFBC7EFF),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                border:Border.all(
-                  color: Color(0xFF000000), 
-                  width: 5,
-                )),
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-              child: Column(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
-                        "Admission No.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hintStyle: TextStyle(color: Colors.black),
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                    ),
-                    controller: admnController,
-                  ),
-                   SizedBox(height: 20,),
-            //Password field
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
-                        "Password",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    obscureText: true,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.red),
-                      filled: true,
-                      fillColor: Colors.white,
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                    ),
-                    controller: pswdController,
-                  ),
-                  SizedBox(height:30),
-                  
-                ],
-              ),
-            ),
-            SizedBox(height: 20,),
-            Align(
-                alignment: Alignment.center,
-                child: FlatButton(
-                  color: Color(0xFFBC7EFF),
-                  padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                  child: BorderedText(
-                    strokeColor: Colors.black,
+              SizedBox(height: 10),
+              //Heading
+              Align(
+                alignment: Alignment.centerLeft,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Text(
                       'Login',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 30
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Ubuntu',
                       ),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black,
-                      width: 5,
-                      style: BorderStyle.solid
-                  ), 
-                  borderRadius: BorderRadius.circular(50)),
-                  onPressed: () async{
-                    int sc = await Ts.makeLoginRequest(admnController.text, pswdController.text); 
-                    print("sc = $sc");
-                    if(sc == 200){
-                      Navigator.of(context).pushNamed('/home');
-                    } else{
-                      showDialog(
-                        context: context,
-                        builder: (_) => 
-                      AlertDialog(
-                        actions: <Widget>[FlatButton( child: Text('Ok'), onPressed:(){Navigator.of(context).pop();} ),],
-                        backgroundColor: Colors.black,
-                        title: Text(
-                          'Wrong Username or Password',
-                          style: TextStyle(
-                          color:Colors.red,
-                          fontSize: 15,
-                          ),
-                        )
-                            )
-                            );
-                    fieldClear();
-                    }
-                      },  
-                      ),
-                  ),
-            SizedBox(height: 30,),
-            Align(
-              alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).pushNamed('/');
-                  },
-                  child: BorderedText(
-                    strokeColor: Colors.black,
-                    child: Text(
-                    "Register Instead",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                    ),
-                    ),
                   ),
                 ),
-            ),
-          ],
+              ),
+              SizedBox(height:30),
+              //Admission no.
+              Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                borderRadius: new BorderRadius.circular(20),
+                color: Colors.grey[850],
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ]
+              ),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        border: OutlineInputBorder(),
+                        labelText: 'Admission No.',
+                       ),
+                      autofocus: false,
+                      controller: admnController,
+                    ),
+              //Password field
+                    SizedBox(height: 10),
+                    TextField(
+                      obscureText: true,
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                       ),
+                      autofocus: false,
+                      controller: pswdController,
+                  ),
+                    
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              Align(
+                  alignment: Alignment.center,
+                  child: FlatButton(
+                    color: Colors.redAccent,
+                    padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30
+                        ),
+                      ),
+
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                    onPressed: () async{
+                      int sc = await Ts.makeLoginRequest(admnController.text, pswdController.text); 
+                      print("sc = $sc");
+                      if(sc == 200){
+                        Navigator.of(context).pushNamed('/home');
+                      } else{
+                        showDialog(
+                          context: context,
+                          builder: (_) => 
+                        AlertDialog(
+                          actions: <Widget>[FlatButton( child: Text('Ok'), onPressed:(){Navigator.of(context).pop();} ),],
+                          backgroundColor: Colors.black,
+                          title: Text(
+                            'Wrong Username or Password',
+                            style: TextStyle(
+                            color:Colors.red,
+                            fontSize: 15,
+                            ),
+                          )
+                              )
+                              );
+                      fieldClear();
+                      }
+                        },  
+                        ),
+                    ),
+              SizedBox(height: 30,),
+              Align(
+                alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).pushNamed('/');
+                    },
+                    child: Text(
+                      "Register Instead",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                      ),
+                  ),
+              ),
+            ],
+          ),
         ),
       ),
     );

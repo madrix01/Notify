@@ -38,37 +38,34 @@ class _NoteListState extends State<NoteList> {
     SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF3c3c3c),
+        backgroundColor: Color(0xFF1c1c1c),
         body:
         Column(
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.redAccent,
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0.0, 1.0), //(x,y)
                     blurRadius: 6.0,
                   ),
-                ],
-                color: Color(0xFFBC7EFF),
-                borderRadius: new BorderRadius.only(bottomLeft: Radius.circular(80)),
-                border:Border.all(
-                  color: Color(0xFF000000), 
-                  width: 5,
-                )),
-              height: 160,
+                ]
+              ),
               width: double.maxFinite,
-              padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
-              child: Center(
+              height: 100,
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Align(
+                alignment: Alignment.center,
                 child: Text(
                   "Notify",
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Ubuntu"
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
-                ),
+                  ),
               ),
             ),
             SizedBox(height: 10),
@@ -77,9 +74,7 @@ class _NoteListState extends State<NoteList> {
               alignment: Alignment.centerLeft,
                 child: Container(
                   margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: BorderedText(
-                    strokeColor: Colors.black,
-                    child: Text(
+                  child: Text(
                     'Sign Up',
                     style: TextStyle(
                       color: Colors.white,
@@ -88,12 +83,13 @@ class _NoteListState extends State<NoteList> {
                       fontFamily: 'Ubuntu',
                     ),
                 ),
-                  ),
               ),
             ),
             SizedBox(height:30),
             //Admission no.
             Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -101,96 +97,53 @@ class _NoteListState extends State<NoteList> {
                     blurRadius: 6.0,
                   ),
                 ],
-                color: Color(0xFFBC7EFF),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                border:Border.all(
-                  color: Color(0xFF000000), 
-                  width: 5,
-                )),
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                color: Colors.grey[850],
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+              
               child: Column(
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
-                        "Admission No.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
                   TextField(
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hintStyle: TextStyle(color: Colors.black),
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                    ),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      border: OutlineInputBorder(),
+                      labelText: 'Admission No.',
+                      hintText: '8 digit admission no.',
+                     ),
+                    autofocus: false,
+                    controller: myController,
                   ),
                    SizedBox(height: 10,),
             //email field
-            Align(
-                    alignment: Alignment.topLeft,
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
-                        "E-mail",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
                   TextField(
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hintStyle: TextStyle(color: Colors.black),
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                    ),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      border: OutlineInputBorder(),
+                      labelText: 'E-Mail',
+                      hintText: 'Email for for Updates',
+                     ),
+                    autofocus: false,
                     controller: emailController,
                   ),
                    SizedBox(height: 10,),
             //Password field
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: BorderedText(
-                      strokeColor: Colors.black,
-                      child: Text(
-                        "Password",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
                   TextField(
                     obscureText: true,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.red),
-                      filled: true,
-                      fillColor: Colors.white,
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide(color:Colors.black, width:5)),
-                    ),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color:Colors.black, width:2)),
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                      hintText: 'Password Longer than 8 charecters',
+                     ),
+                    autofocus: false,
                     controller: pswdController,
                   ),
-                  SizedBox(height:20),
                   
                 ],
               ),
@@ -199,29 +152,20 @@ class _NoteListState extends State<NoteList> {
             Align(
               alignment: Alignment.center,
               child: FlatButton(
-                color: Color(0xFFBC7EFF),
+                color: Colors.redAccent,
                 padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: BorderedText(
-                  strokeColor: Colors.black,
-                    child: Text(
+                child: Text(
                     'Sign Up',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30
                     ),
                     ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Colors.black,
-                    width: 5,
-                    style: BorderStyle.solid
-                    ), 
-                  borderRadius: BorderRadius.circular(50)),
-                onPressed: (){
-                  reg.makePostRequest(myController.text, emailController.text, pswdController.text);
-                  int state = reg.statusCode;
-                  if(state == 200){
+                shape: RoundedRectangleBorder( 
+                  borderRadius: BorderRadius.circular(20)),
+                onPressed: () async{
+                  int state = await reg.makePostRequest(myController.text, emailController.text, pswdController.text);
+                  if(state == 201){
                     print('Request made');
                     Navigator.of(context).pushNamed('/second');
                   } else {
@@ -253,16 +197,13 @@ class _NoteListState extends State<NoteList> {
                   onTap: (){
                     Navigator.of(context).pushNamed('/second');
                   },
-                  child: BorderedText(
-                    strokeColor: Colors.black,
-                    child: Text(
+                  child: Text(
                     "Login Instead",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                     ),
                     ),
-                  ),
                 ),
             ),
           ],
