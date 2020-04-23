@@ -5,13 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:testlogin/Service/loginVerification.dart' as logreg;
 import 'dart:async';
 
+import './../urls.dart';
 
 int _logoutState;
 int get logoutState => _logoutState;
 
 
+
 makeLogoutRequest(String tkn) async{
-  final uri = 'http://192.168.1.109:8000/auth/token/logout/';
+  final uri = hostName + '/auth/token/logout/';
   String token = tkn;
   final encoding = Encoding.getByName('utf-8');
   final logoutResp = 

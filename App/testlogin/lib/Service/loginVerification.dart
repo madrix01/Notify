@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 
+import './../urls.dart';
 
 String _token;
 String get token => _token; 
@@ -11,7 +12,7 @@ int get loginStatus => _loginStatus;
 
 makeLoginRequest(String admn_no, String password) async{
   print("Making login request $_token");
-  final uri = 'http://192.168.1.109:8000/auth/token/login';
+  final uri = hostName + '/auth/token/login';
   final headers = {'Content-Type': 'application/json'};
   Map<String, dynamic> body = { 
     'admn_no': admn_no,

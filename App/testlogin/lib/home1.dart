@@ -6,6 +6,8 @@ import 'package:testlogin/Service/logoutService.dart' as lgOut;
 import 'package:testlogin/Service/loginVerification.dart' as lgIn;
 import 'package:testlogin/Model/postModel.dart';
 import 'Service/logoutService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:testlogin/posts/myposts.dart';
 
 int _usr;
@@ -26,6 +28,13 @@ class _HomePageState extends State<HomePage>{
   void dispose(){
     _controller.dispose();
     super.dispose();
+  }
+
+  _makeLogoutwithSharedPreferences(var context)async{
+  SharedPreferences currentInstance = await SharedPreferences.getInstance();
+  await currentInstance.setBool('loginStatus', false);
+
+  Navigator.pushNamed(context, '/');
   }
 
   @override
@@ -123,6 +132,7 @@ class _HomePageState extends State<HomePage>{
               children: <Widget>[
                 IconButton(icon: Icon(Icons.lock_outline, color: Colors.white,),
                 onPressed: (){
+                    _makeLogoutwithSharedPreferences(context);
                    makeLogoutRequest(lgIn.token);
                    Navigator.of(context).pushNamed('/second');
                    print(lgIn.token);

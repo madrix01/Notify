@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:testlogin/Service/homePage.dart' as hp;
+
+import './../urls.dart';
+
+
+
 int _postStatCode;
 int get postStatCode => _postStatCode;
 
 makeNewRequest(String title, String description, String tkn) async{
-  final uri = 'http://192.168.1.109:8000/post/allpost/api/';
+  final uri = hostName + '/post/allpost/api/';
   final headers = {
     'Authorization': 'Token $tkn',
     'Content-Type': 'application/json',

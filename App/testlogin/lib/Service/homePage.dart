@@ -3,11 +3,13 @@ import 'package:testlogin/Service/loginVerification.dart' as TokenService;
 import 'package:http/http.dart' as http ; 
 import 'dart:convert';
 
+import './../urls.dart';
+
 String _usrId;
 String get usrId => _usrId;
 
 Future<List<TestApi>> fetchTestApi() async {
-  final String url = 'http://192.168.1.109:8000/auth/home/';
+  final String url = hostName + '/auth/home/';
   final String tkn = TokenService.token;
   final response = 
       await http.get(
