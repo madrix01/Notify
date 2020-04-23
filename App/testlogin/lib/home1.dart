@@ -1,12 +1,12 @@
 import 'dart:ffi';
-
+import 'package:testlogin/posts/posts.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:testlogin/Service/homePage.dart';
 import 'package:testlogin/Service/logoutService.dart' as lgOut;
 import 'package:testlogin/Service/loginVerification.dart' as lgIn;
 import 'package:testlogin/Model/postModel.dart';
 import 'Service/logoutService.dart';
+import 'package:testlogin/posts/myposts.dart';
 
 int _usr;
 int get usr => _usr; 
@@ -15,10 +15,17 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>{
   Future<Void> refreshlist() async {
     await Future.delayed(Duration(seconds: 2));
     fetchPostApi();
+  }
+  TabController _controller;
+
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,116 +51,67 @@ class _HomePageState extends State<HomePage> {
               ),
               width: double.maxFinite,
               height: 100,
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Align(
                 alignment: Alignment.center,
-                child: Text(
-                  "Notify",
-                  style: TextStyle(
-                    fontSize: 50,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
-                  ),
+                child:
+                    Text(
+                      "Notify",
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
               ),
             ),
-              SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Welcome,",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  FutureBuilder<List<TestApi>>(
-                      future: fetchTestApi(),
-                      builder: (BuildContext context,AsyncSnapshot<List<TestApi>> snapshot){
-                        if (snapshot.hasData){
-                          List<TestApi> apis = snapshot.data;
-                            return Text(
-                                apis[0].username.toUpperCase(),
-                                style:
-                                  TextStyle(
-                                    color: Color(0xFF00D7EC),
-                                    fontSize: 30
-                                ),
-                              );
-                          } else if (snapshot.hasError){
-                            return Text('${snapshot.error}');
-                          }
-                          return CircularProgressIndicator();
-                      },
-                    ),
-                ],
+            Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Welcome,",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold
               ),
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color:Colors.grey[850],
-                ),
-                
-                height: 550,
-                child: RefreshIndicator(
-                  onRefresh: refreshlist,
-                  child: FutureBuilder(
-                    future: fetchPostApi(),
-                    builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot){
-                      if(snapshot.hasData){
-                        List<Post> posts = snapshot.data;
-                        return ListView(
-                          children: posts.map((Post post) => ListTile(
-                            title: Text(
-                              post.title,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30
-                                ),
-                              ),
-                            subtitle: Text(
-                              post.description,
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 20
-                                )
-                              ),
-                            ),
-                        ).toList(),
+            ),
+            SizedBox(width: 10,),
+            FutureBuilder<List<TestApi>>(
+                future: fetchTestApi(),
+                builder: (BuildContext context,AsyncSnapshot<List<TestApi>> snapshot){
+                  if (snapshot.hasData){
+                    List<TestApi> apis = snapshot.data;
+                      return Text(
+                          apis[0].username.toUpperCase(),
+                          style:
+                            TextStyle(
+                              color: Color(0xFF00D7EC),
+                              fontSize: 30
+                          ),
                         );
-                      }else {
-                        Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
+                    } else if (snapshot.hasError){
+                      return Text('${snapshot.error}');
+                    }
+                    return CircularProgressIndicator();
+                },
               ),
-              // Align(
-              // alignment: Alignment.center,
-              // child: FlatButton(
-                 
-              //   padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-              //   child: Text(
-              //     'Logout',
-              //     style: TextStyle(
-              //       color: Colors.red,
-              //       fontSize: 30
-              //     ),
-              //     ),
-              //   shape: RoundedRectangleBorder(
-              //     side: BorderSide(
-              //       color: Colors.red,
-              //       width: 1,
-              //       style: BorderStyle.solid
-              //       ), 
-              //     borderRadius: BorderRadius.circular(50)),
-              // )
-              // ),
+          ],
+        ),
+            SizedBox(height: 10,),
+              Container(
+                height: 600,
+                child: DefaultTabController(
+                  length: 2,                
+                  child: TabBarView(
+                    controller: _controller,
+                    children: <Widget>[
+                      Posts(),
+                      MyPosts(),
+                  ],
+              ),
+                ),
+                ),
             ],
           ),
           bottomNavigationBar: BottomAppBar(

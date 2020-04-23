@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:testlogin/Service/loginVerification.dart' as TokenService;
 import 'package:http/http.dart' as http ; 
 import 'dart:convert';
@@ -34,8 +33,8 @@ class TestApi{
   final String userId;
 
   TestApi({
-    @required this.username, 
-    @required this.userId,
+    this.username, 
+    this.userId,
     });
 
   factory TestApi.fromJson(Map<String, dynamic> json){
