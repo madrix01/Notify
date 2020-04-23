@@ -5,6 +5,8 @@ import 'package:testlogin/login.dart';
 import 'package:testlogin/routeGenerator.dart';
 import 'package:testlogin/Service/registration.dart' as reg ;
 import 'package:bordered_text/bordered_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class NoteList extends StatefulWidget {
@@ -13,6 +15,15 @@ class NoteList extends StatefulWidget {
 }
 
 class _NoteListState extends State<NoteList> {
+
+  _CheckIsUserLoggedIn(var context)async{
+  SharedPreferences currentInstance = await SharedPreferences.getInstance();
+  bool userStatus = currentInstance.getBool('loginStatus') ?? false;
+  print("User Login Status"); print(userStatus);
+  if(userStatus == true){
+    Navigator.pushNamed(context, '/home');
+  } 
+}
 
   final myController = TextEditingController();
   final pswdController = TextEditingController();
@@ -34,6 +45,9 @@ class _NoteListState extends State<NoteList> {
 
   @override
   Widget build(BuildContext context) {
+  _CheckIsUserLoggedIn(context);
+   
+
     return
     SafeArea(
       child: Scaffold(

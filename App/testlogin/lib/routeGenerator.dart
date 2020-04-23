@@ -4,6 +4,9 @@ import 'package:testlogin/home.dart';
 import 'package:testlogin/home1.dart';
 import 'package:testlogin/addPost.dart';
 
+
+
+
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
     
@@ -11,6 +14,8 @@ class RouteGenerator{
     print(settings.name);
 
     switch (settings.name){
+      case '/':
+        return MaterialPageRoute(builder: (_) => NoteList());
       case '/':
         return MaterialPageRoute(builder: (_) => NoteList());
       case '/second':

@@ -2,8 +2,10 @@ import 'package:testlogin/Service/loginVerification.dart' as TokenService;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import './../urls.dart';
+
 Future<List<Post>> fetchPostApi() async{
-  final String url = 'http://192.168.1.109:8000/post/allpost/api/';
+  final String url = hostName + '/post/allpost/api/';
   final String tkn = TokenService.token;
   print(tkn);
   final response = 
