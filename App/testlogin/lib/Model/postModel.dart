@@ -30,14 +30,17 @@ class Post{
   final int user_id;
   final String title;
   final String description;
+  final String timepost;
+  
 
-  Post({this.user_id, this.title, this.description});
+  Post({this.user_id, this.title, this.description, this.timepost});
 
   factory Post.fromJson(Map<String, dynamic> json){
     return Post(
       user_id: json["user_id"],
       title: json["title"],
       description: json["description"],
+      timepost: json['timepost'],
     );
   }
 

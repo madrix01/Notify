@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/Service/myPostService.dart';
 import 'package:testlogin/Model/postModel.dart';
+import 'package:testlogin/posts/postdetail.dart';
 
 class MyPosts extends StatefulWidget {
   @override
@@ -35,6 +36,13 @@ class _MyPostsState extends State<MyPosts> {
                   List<Post> posts = snapshot.data;
                   return ListView(
                     children: posts.map((Post post) => ListTile(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PostDetail(
+                            post : post,
+                          )
+                        )
+                      ),
                       title: Text(
                         post.title,
                         style: TextStyle(
