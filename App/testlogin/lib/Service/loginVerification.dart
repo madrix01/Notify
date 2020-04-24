@@ -11,7 +11,6 @@ int _loginStatus;
 int get loginStatus => _loginStatus;
 
 makeLoginRequest(String admn_no, String password) async{
-  print("Making login request $_token");
   final uri = hostName + '/auth/token/login';
   final headers = {'Content-Type': 'application/json'};
   Map<String, dynamic> body = { 
@@ -27,7 +26,6 @@ makeLoginRequest(String admn_no, String password) async{
     encoding: encoding,
   );
   _loginStatus = response.statusCode;
-  print("[Login Status code $_loginStatus]");
   String responseBody = response.body;
   Map valueMap = json.decode(responseBody);
   _token = valueMap['auth_token'];

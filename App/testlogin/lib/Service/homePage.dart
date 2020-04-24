@@ -19,10 +19,7 @@ Future<List<TestApi>> fetchTestApi() async {
 
   if (response.statusCode == 200){
     List<dynamic> body = jsonDecode(response.body);
-    print('Success');
-    print(response.body);
     List<TestApi> apis = body.map((dynamic item) => TestApi.fromJson(item)).toList();
-    print(apis[0].userId);
     _usrId = apis[0].userId;
     return apis;
   } else{
