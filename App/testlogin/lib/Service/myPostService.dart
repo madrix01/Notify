@@ -17,7 +17,8 @@ Future<List<Post>> fetchMyPost() async {
     );
   if(response.statusCode == 200){
     List<dynamic> body = jsonDecode(response.body);
-    List<Post> myPostApis = body.map((dynamic item) => Post.fromJson(item)).toList();
+    List<dynamic> revBody = body.reversed.toList();
+    List<Post> myPostApis = revBody.map((dynamic item) => Post.fromJson(item)).toList();
     return myPostApis;
   } else{
     print("No return");

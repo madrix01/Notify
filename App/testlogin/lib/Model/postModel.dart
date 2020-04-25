@@ -18,9 +18,11 @@ Future<List<Post>> fetchPostApi() async{
     );
   if(response.statusCode == 200){
     List<dynamic> body = jsonDecode(response.body);
+    List<dynamic> revBody = body.reversed.toList();
     print("success");
     print(response.body);
-    List<Post> postApis = body.map((dynamic item) => Post.fromJson(item)).toList();
+
+    List<Post> postApis = revBody.map((dynamic item) => Post.fromJson(item)).toList();
     return postApis;
   } else{
     print("[No Return]");

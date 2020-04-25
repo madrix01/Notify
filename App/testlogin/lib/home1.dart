@@ -44,84 +44,101 @@ class _HomePageState extends State<HomePage>{
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
-          backgroundColor: Color(0xFF1c1c1c),
-          body: Column(
+          backgroundColor: Color(0xFF000000),
+          body: Stack(
+            alignment: AlignmentDirectional.bottomCenter,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.redAccent,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ]
-              ),
-              width: double.maxFinite,
-              height: 100,
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: Align(
-                alignment: Alignment.center,
-                child:
-                    Text(
-                      "Notify",
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold
-                      ),
+              Column(children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50),
                     ),
-              ),
-            ),
-            Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Welcome,",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              ),
-            ),
-            SizedBox(width: 10,),
-            FutureBuilder<List<TestApi>>(
-                future: fetchTestApi(),
-                builder: (BuildContext context,AsyncSnapshot<List<TestApi>> snapshot){
-                  if (snapshot.hasData){
-                    List<TestApi> apis = snapshot.data;
-                      return Text(
-                          apis[0].username.toUpperCase(),
-                          style:
-                            TextStyle(
-                              color: Color(0xFF00D7EC),
-                              fontSize: 30
-                          ),
-                        );
-                    } else if (snapshot.hasError){
-                      return Text('${snapshot.error}');
-                    }
-                    return CircularProgressIndicator();
-                },
-              ),
-          ],
-        ),
-            SizedBox(height: 10,),
-              Container(
-                height: 600,
-                child: DefaultTabController(
-                  length: 2,                
-                  child: TabBarView(
-                    controller: _controller,
-                    children: <Widget>[
-                      Posts(),
-                      MyPosts(),
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF512da8), Color(0xFFB388FF)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight
+                    ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
                   ],
+                  ),
+                  width: double.maxFinite,
+                  height: 400,
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child:
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              "Notify",
+                              style: TextStyle(
+                                fontSize: 70,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Welcome,",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              FutureBuilder<List<TestApi>>(
+                                  future: fetchTestApi(),
+                                  builder: (BuildContext context,AsyncSnapshot<List<TestApi>> snapshot){
+                                    if (snapshot.hasData){
+                                      List<TestApi> apis = snapshot.data;
+                                        return Text(
+                                            apis[0].username.toUpperCase(),
+                                            style:
+                                              TextStyle(
+                                                color: Color(0xFF00D7EC),
+                                                fontSize: 30
+                                            ),
+                                          );
+                                      } else if (snapshot.hasError){
+                                        return Text('${snapshot.error}');
+                                      }
+                                      return CircularProgressIndicator();
+                                  },
+                                ),
+                            ],
+                        ),
+                        ],
+                      ),
+                ),
               ),
+              ],
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+                  height: 600,
+                  child: DefaultTabController(
+                    length: 2,                
+                    child: TabBarView(
+                      controller: _controller,
+                      children: <Widget>[
+                        Posts(),
+                        MyPosts(),
+                    ],
                 ),
-                ),
-            ],
+                  ),
+                  ),
+            ], 
+              
           ),
           bottomNavigationBar: BottomAppBar(
             notchMargin: 5,
@@ -147,7 +164,7 @@ class _HomePageState extends State<HomePage>{
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.create),
             elevation: 4.0,
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Color(0xFF512DA8),
             onPressed: (){
               Navigator.of(context).pushNamed('/addPost');
             },

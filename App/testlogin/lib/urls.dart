@@ -1,1 +1,1 @@
-var hostName = 'http://192.168.1.110:8000';
+var hostName = "https://notifytwtcs.herokuapp.com";

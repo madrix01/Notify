@@ -1,7 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dio/dio.dart' as dio;
-
 import './../urls.dart';
 
 String _token;
