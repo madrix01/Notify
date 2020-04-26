@@ -25,9 +25,8 @@ class _MyPostsState extends State<MyPosts> {
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color:Colors.grey[850],
+            color: Colors.grey[900],
           ),
-          
           height: 550,
           child: FutureBuilder(
               future: fetchMyPost(),

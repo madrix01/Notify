@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:testlogin/posts/postSearch.dart';
 import 'package:testlogin/posts/posts.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/Service/homePage.dart';
@@ -7,7 +8,6 @@ import 'package:testlogin/Service/loginVerification.dart' as lgIn;
 import 'package:testlogin/Model/postModel.dart';
 import 'Service/logoutService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:testlogin/posts/myposts.dart';
 
 int _usr;
@@ -155,7 +155,9 @@ class _HomePageState extends State<HomePage>{
                    print(lgIn.token);
                  },
                 ),
-                IconButton(icon: Icon(Icons.search, color: Colors.white,), onPressed: () {},),
+                IconButton(icon: Icon(Icons.search, color: Colors.white,), onPressed: () {
+                  Navigator.of(context).pushNamed('/search');
+                  },),
               ],
             ),
             color: Colors.grey[850],

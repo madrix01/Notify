@@ -25,7 +25,7 @@ class _PostsState extends State<Posts> {
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color:Colors.grey[850],
+            color:Colors.grey[900],
           ),
           
           height: 550,
@@ -35,7 +35,6 @@ class _PostsState extends State<Posts> {
                 if(snapshot.hasData){
                   List<Post> posts = snapshot.data;
                   return ListView(
-                    
                     children: posts.map((Post post) => ListTile(
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(

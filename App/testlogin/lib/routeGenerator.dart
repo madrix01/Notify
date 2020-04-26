@@ -3,6 +3,7 @@ import 'package:testlogin/login.dart';
 import 'package:testlogin/home.dart';
 import 'package:testlogin/home1.dart';
 import 'package:testlogin/addPost.dart';
+import 'package:testlogin/posts/postSearch.dart';
 
 
 
@@ -24,6 +25,8 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/addPost':
         return MaterialPageRoute(builder: (_) => CreatePost());
+      case '/search':
+        return MaterialPageRoute(builder: (_) => PostSearch()); 
     }
   }
 }
